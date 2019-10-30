@@ -256,16 +256,6 @@ public class GameActivity extends AppCompatActivity {
         alert.setMessage(output);
         alert.setPositiveButton("Yes", box);
         alert.setNegativeButton("No", box);
-        //So when people click off the alert, it replays game with current settings instead
-        // of them continuing to play a game that's already finished
-        alert.setOnDismissListener(new DialogInterface.OnDismissListener() {
-            @Override
-            public void onDismiss(DialogInterface dialogInterface) {
-                Intent newIntent = new Intent(GameActivity.this, GameActivity.class);
-                finish();
-                startActivity(newIntent);
-            }
-        });
         alert.show();
     }
 

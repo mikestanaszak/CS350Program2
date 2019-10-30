@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_page);
         Button btn = findViewById(R.id.onePlayer);
+        //Player clicks this to play against computer
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -32,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         btn = findViewById(R.id.twoPlayer);
+        //Player clicks this to play against another player
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -41,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         btn = findViewById(R.id.highScores);
+        //Player clicks this to see top winners
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
