@@ -13,6 +13,8 @@ public class MoveChip extends TimerTask {
     private ImageView iv;
     private int r;
     private int h;
+    private int col;
+    private int player;
     private Activity activity;
     //Have to pass activity in order to call runOnUiThread to edit the ImageViews
     public MoveChip(GameView v, int height, int row, Activity act){

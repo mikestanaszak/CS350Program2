@@ -2,21 +2,13 @@ package com.example.program2;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.graphics.Canvas;
-import android.graphics.Color;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
-import androidx.appcompat.app.AlertDialog;
-
-import java.util.ArrayList;
 import java.util.Random;
 import java.util.Timer;
 
@@ -39,6 +31,7 @@ public class GameView extends RelativeLayout implements View.OnTouchListener {
     private int width, height;
     private String Player1Name, Player2Name;
     private boolean firstRun = false;
+    private boolean gameOver = false;
 
 
     public GameView(Activity act, Context context, int width, int height, int p1, int p2, String p1n, String p2n) {
@@ -174,7 +167,7 @@ public class GameView extends RelativeLayout implements View.OnTouchListener {
                 chips[count - 1].setOnTouchListener(null);
                 turn--;
                 validMove = true;
-                CheckWinner(row, currentCol, 2);
+                CheckWinner(row, cCol, 2);
             }
         }
     }
@@ -183,22 +176,29 @@ public class GameView extends RelativeLayout implements View.OnTouchListener {
     // then will end the game based on where its at.
     public void CheckWinner(int row, int col, int player) {
         int check = game.GameOver(row, col, player);
-        if (check == 1) {
-            GameActivity p = (GameActivity) activity;
-            p.ShowAlert(Player1Name);
-        } else if (check == 2) {
-            GameActivity p = (GameActivity) activity;
-            p.ShowAlert(Player2Name);
-        }
-        else if(isFull()){
-            GameActivity p = (GameActivity) activity;
-            p.ShowAlert("TIE");
+        if(!gameOver){
+            if (check == 1) {
+                GameActivity p = (GameActivity) activity;
+                p.ShowAlert(Player1Name);
+                gameOver = true;
+            } else if (check == 2) {
+                GameActivity p = (GameActivity) activity;
+                p.ShowAlert(Player2Name);
+                gameOver = true;
+            }
+            else if(isFull()){
+                GameActivity p = (GameActivity) activity;
+                p.ShowAlert("TIE");
+                gameOver = true;
+            }
         }
     }
 
     //Adding chips to the board after blah is called. We bring board to front after so that it
     // looks nice.
     public void addChip() {
+        if(gameOver)
+            return;
         chips[count] = new ImageView(context);
         chipParams[count] = new LayoutParams(90, 90);
         chips[count].setLayoutParams(chipParams[count]);
